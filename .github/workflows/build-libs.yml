@@ -57,6 +57,11 @@ jobs:
         shell: sh
 
     steps:
+    - name: Install Git (Linux)
+      run: |
+        apt-get update
+        apt-get install -y git ca-certificates
+      
     - uses: actions/checkout@v4
       with:
         sparse-checkout: |
