@@ -79,6 +79,8 @@ jobs:
     - name: Checkout repository (Linux)
       if: ${{ matrix.platform == 'linux' }}
       run: |
+        git config --global --add safe.directory /__w/Everest-libs/Everest-libs
+
         git init
         git remote add origin https://github.com/${{ github.repository }}.git
         git config core.sparseCheckout true
