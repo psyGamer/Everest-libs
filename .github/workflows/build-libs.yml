@@ -71,7 +71,9 @@ jobs:
         sparse-checkout: |
           source
           patches
-        submodules: recursive
+    - name: Checkout submodules
+      run:
+        git submodule update --init --recursive
 
     # Setup
     - name: Set up MSVC (Windows)
