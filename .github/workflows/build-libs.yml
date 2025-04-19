@@ -29,21 +29,25 @@ jobs:
             platform: windows
             msys2_system: mingw32
             msys2_env: i686
+            cmake_flags: --verbose --parallel
 
           - name: Windows x64
             os: windows-latest
             platform: windows
             msys2_system: mingw64
             msys2_env: x86_64
+            cmake_flags: --verbose --parallel
 
           - name: Linux x64
             os: ubuntu-latest
             platform: linux
             container: debian:buster # Required for GLIBC v2.28
+            cmake_flags:
 
           - name: macOS x64
             os: macos-latest
             platform: macos
+            cmake_flags: --verbose --parallel
             
     name: FNAlibs (${{ matrix.name }})
     runs-on: ${{ matrix.os }}
@@ -148,7 +152,7 @@ jobs:
 
     - name: Build SDL2
       working-directory: source/SDL2
-      run: cmake --build build --config ${{ env.BUILD_TYPE }} --verbose --parallel
+      run: cmake --build build --config ${{ env.BUILD_TYPE }} ${{ matrix.cmake_flags }}
 
     - name: Install SDL2
       working-directory: source/SDL2
@@ -201,7 +205,7 @@ jobs:
 
     - name: Build FNA3D
       working-directory: source/FNA/lib/FNA3D
-      run: cmake --build build --config ${{ env.BUILD_TYPE }} --verbose --parallel
+      run: cmake --build build --config ${{ env.BUILD_TYPE }} ${{ matrix.cmake_flags }}
 
     # FAudio
     - name: Patch FAudio
@@ -224,7 +228,7 @@ jobs:
       
     - name: Build FAudio
       working-directory: source/FNA/lib/FAudio
-      run: cmake --build build --config ${{ env.BUILD_TYPE }} --verbose --parallel
+      run: cmake --build build --config ${{ env.BUILD_TYPE }} ${{ matrix.cmake_flags }}
 
     # Theorafile
     - name: Build Theorafile (Windows)
