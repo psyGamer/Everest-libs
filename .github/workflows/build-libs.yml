@@ -74,11 +74,11 @@ jobs:
         EOF
         
         apt-get update
-        apt-get install -y -t bullseye git ca-certificates
+        apt-get install -y git ca-certificates
       
     - name: Checkout repository (Windows & macOS)
       uses: actions/checkout@v4
-      # if: ${{ matrix.platform != 'linux' }}
+      if: ${{ matrix.platform != 'linux' }}
       with:
         sparse-checkout: |
           source
@@ -87,7 +87,7 @@ jobs:
 
     # Need to use CLI since checkout action doesn't like that Git was installed manually
     - name: Checkout repository (Linux)
-      if: ${{ matrix.platform == 'alinux' }}
+      if: ${{ matrix.platform == 'linux' }}
       run: |
         git config --global --add safe.directory /__w/Everest-libs/Everest-libs
 
