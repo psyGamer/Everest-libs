@@ -39,6 +39,7 @@ jobs:
           - name: Linux x64
             os: ubuntu-latest
             platform: linux
+            container: quay.io/pypa/manylinux_2_28_x86_64 # See https://kobzol.github.io/rust/ci/2021/05/07/building-rust-binaries-in-ci-that-work-with-older-glibc.html
 
           - name: macOS x64
             os: macos-latest
@@ -46,6 +47,10 @@ jobs:
             
     name: FNAlibs (${{ matrix.name }})
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
+
+    env:
+      MACOSX_DEPLOYMENT_TARGET: 10.12
 
     defaults:
       run:
