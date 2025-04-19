@@ -62,6 +62,9 @@ jobs:
       run: |
         apt-get update
         apt-get install -y git ca-certificates
+        echo $PATH
+        git --version
+        which git
       
     - uses: actions/checkout@v4
       with:
