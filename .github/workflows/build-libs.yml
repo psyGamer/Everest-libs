@@ -39,7 +39,7 @@ jobs:
           - name: Linux x64
             os: ubuntu-latest
             platform: linux
-            container: quay.io/pypa/manylinux_2_28_x86_64 # See https://kobzol.github.io/rust/ci/2021/05/07/building-rust-binaries-in-ci-that-work-with-older-glibc.html
+            container: debian:buster # Required for GLIBC v2.28
 
           - name: macOS x64
             os: macos-latest
