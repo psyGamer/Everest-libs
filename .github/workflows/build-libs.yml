@@ -58,6 +58,7 @@ jobs:
 
     steps:
     - name: Install Git (Linux)
+      if: ${{ matrix.platform == 'linux' }}
       run: |
         apt-get update
         apt-get install -y git ca-certificates
