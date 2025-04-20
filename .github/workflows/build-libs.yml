@@ -470,7 +470,7 @@ jobs:
     - name: Upload Piton binaries
       uses: actions/upload-artifact@v4
       with:
-        name: piton-apphosts
+        name: piton-apphosts-${{ matrix.target }}
         path: source/Piton/apphost/${{ matrix.lib_name }}
 
   generate-lib-ext:
@@ -487,6 +487,12 @@ jobs:
         run: |
           rm -rf ../lib-ext ../binaries
           mkdir ../lib-ext ../binaries
+
+      - name: Merge Piton apphosts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: piton-apphosts
+          pattern: piton-apphosts-*
   
       - uses: actions/download-artifact@v4
         with:
