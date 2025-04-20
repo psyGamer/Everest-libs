@@ -470,7 +470,7 @@ jobs:
     - name: Upload Piton binaries
       uses: actions/upload-artifact@v4
       with:
-        name: piton-apphosts-${{ matrix.target }}
+        name: piton-apphosts
         path: source/Piton/apphost/${{ matrix.lib_name }}
 
   generate-lib-ext:
@@ -572,12 +572,7 @@ jobs:
           cp ../binaries/discord_game_sdk/lib/x86_64/discord_game_sdk.so lib64-linux/libdiscord_game_sdk.so
 
           ### Piton
-          mv ../binaries/piton-apphosts-i686-pc-windows-msvc piton
-          mv ../binaries/piton-apphosts-x86_64-pc-windows-msvc piton
-          mv ../binaries/piton-apphosts-x86_64-unknown-linux-gnu piton
-          mv ../binaries/piton-apphosts-x86_64-apple-darwin piton
-
-          popd
+          mv ../binaries/piton-apphosts piton
 
       - name: Display the new structure
         run: ls -R ../lib-ext
@@ -597,19 +592,3 @@ jobs:
           git add -f .
           git commit -m "Update binaries for ${{ github.sha }}" || true
           git push origin binaries
-
-          
-
-
-
-
-    
-
-
-
-
-
-    
-
-
-
